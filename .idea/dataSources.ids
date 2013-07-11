@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><component name="dataSourceStorage">
+  <data-source source="LOCAL" name="Data Source" product="MySQL" version="5.6.11-log" jdbc-version="3.0" driver-name="MySQL-AB JDBC Driver" driver-version="mysql-connector-java-5.1.9 ( Revision: ${svn.Revision} )" uuid="393a0253-7545-4333-8412-dee260692f75">
+    <extra-name-characters>#@</extra-name-characters>
+    <identifier-quote-string>`</identifier-quote-string>
+    <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+    <jdbc-url>jdbc:mysql://localhost:3306/admin</jdbc-url>
+    <user-name>admin</user-name>
+    <user-password>dfcbdfcedfc7dfc3dfc4df9bdf98df99</user-password>
+    <schema-pattern>admin.*</schema-pattern>
+    <default-schemas>admin.*</default-schemas>
+    <libraries>
+      <library>
+        <url>jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.9/mysql-connector-java-5.1.9.jar!/</url>
+      </library>
+    </libraries>
+    <schema name="" catalog="admin" />
+    <table name="emails" schema="" catalog="admin" type="TABLE">
+      <column name="idEmails" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true" />
+      <column name="UniqAddress" sqlType="VARCHAR" length="45" precision="0" nullable="true" jdbcType="12" />
+      <column name="CreateDate" sqlType="VARCHAR" length="45" precision="0" nullable="true" jdbcType="12" />
+      <column name="EmailOwner" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="idEmails" />
+      <foreign-key name="UsersAFolders" columns="EmailOwner" ref-table="users" ref-schema="" ref-catalog="admin" ref-columns="idUsers" update-rule="3" delete-rule="0" deferrability="2" />
+      <exported-key name="EmailsAFolders" table="folders" schema="" catalog="admin" columns="EmailAddressId" />
+      <index name="idUsers_idx" unique="false" columns="EmailOwner" />
+    </table>
+    <table name="folders" schema="" catalog="admin" type="TABLE">
+      <column name="idFolders" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true" />
+      <column name="FolderName" sqlType="VARCHAR" length="45" precision="0" nullable="true" jdbcType="12" />
+      <column name="EmailAddressId" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="idFolders" />
+      <foreign-key name="EmailsAFolders" columns="EmailAddressId" ref-table="emails" ref-schema="" ref-catalog="admin" ref-columns="idEmails" update-rule="3" delete-rule="0" deferrability="2" />
+      <exported-key name="FoldersALetters" table="letters" schema="" catalog="admin" columns="LetterOwnerTo" />
+      <exported-key name="FoldersALetters2" table="letters" schema="" catalog="admin" columns="LetterOwnerFrom" />
+      <index name="EmailsAFolders_idx" unique="false" columns="EmailAddressId" />
+    </table>
+    <table name="letters" schema="" catalog="admin" type="TABLE">
+      <column name="idLetters" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true" />
+      <column name="FromEmail" sqlType="VARCHAR" length="45" precision="0" nullable="true" jdbcType="12" />
+      <column name="ToEmail" sqlType="VARCHAR" length="45" precision="0" nullable="true" jdbcType="12" />
+      <column name="Date" sqlType="VARCHAR" length="80" precision="0" nullable="true" jdbcType="12" />
+      <column name="Subject" sqlType="VARCHAR" length="150" precision="0" nullable="true" jdbcType="12" />
+      <column name="Body" sqlType="VARCHAR" length="450" precision="0" nullable="true" jdbcType="12" />
+      <column name="LetterOwnerTo" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="LetterOwnerFrom" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="idLetters" />
+      <foreign-key name="FoldersALetters" columns="LetterOwnerTo" ref-table="folders" ref-schema="" ref-catalog="admin" ref-columns="idFolders" update-rule="3" delete-rule="0" deferrability="2" />
+      <foreign-key name="FoldersALetters2" columns="LetterOwnerFrom" ref-table="folders" ref-schema="" ref-catalog="admin" ref-columns="idFolders" update-rule="3" delete-rule="0" deferrability="2" />
+      <index name="FoldersALetters_idx" unique="false" columns="LetterOwnerTo" />
+      <index name="FoldersALetters2_idx" unique="false" columns="LetterOwnerFrom" />
+    </table>
+    <table name="users" schema="" catalog="admin" type="TABLE">
+      <column name="idUsers" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true" />
+      <column name="Name" sqlType="VARCHAR" length="45" precision="0" nullable="true" jdbcType="12" />
+      <column name="Surname" sqlType="VARCHAR" length="45" precision="0" nullable="true" jdbcType="12" />
+      <column name="Birthday" sqlType="VARCHAR" length="45" precision="0" nullable="true" jdbcType="12" />
+      <column name="Phone" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <primary-key name="PRIMARY" columns="idUsers" />
+      <exported-key name="UsersAFolders" table="emails" schema="" catalog="admin" columns="EmailOwner" />
+    </table>
+  </data-source>
+</component>

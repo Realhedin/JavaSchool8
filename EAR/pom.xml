@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>EAR</artifactId>
+    <packaging>ear</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>EAR</name>
+
+
+    <parent>
+        <artifactId>MyNewDemail2</artifactId>
+        <groupId>MyNewDemail2</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+            <dependency>
+                <groupId>MyNewDemail2</groupId>
+                <artifactId>Model</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <type>ejb</type>
+            </dependency>
+        <dependency>
+            <groupId>MyNewDemail2</groupId>
+            <artifactId>View</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <!--
+                The ear plugin must include the definition for "modules",
+                for any modules that are needed to be included in the EAR file,
+                you need to specify them one by one, e.g. "ejbModule", "webModule",
+                "jarModule" and "appClientModule".
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>2.8</version>
+                <configuration>
+                   <version>6</version>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+
+                    <modules>
+                        <ejbModule>
+                            <groupId>MyNewDemail2</groupId>
+                            <artifactId>Model</artifactId>
+                            <bundleFileName>model.jar</bundleFileName>
+                            <!--unpack>true</unpack-->
+                            <!--version>1.0-SNAPSHOT</version-->
+                        </ejbModule>
+                        <webModule>
+                            <groupId>MyNewDemail2</groupId>
+                            <artifactId>View</artifactId>
+                            <!--unpack>true</unpack-->
+                            <!--version>1.0-SNAPSHOT</version-->
+                            <!--context-root>/View/login.xhtml</context-root-->
+                        </webModule>
+                    </modules>
+                </configuration>
+            </plugin>
+        </plugins>
+        <!--finalName>Demail4</finalName-->
+    </build>
+
+</project>

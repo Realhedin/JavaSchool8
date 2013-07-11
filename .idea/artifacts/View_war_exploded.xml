@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="View:war exploded">
+    <output-path>$PROJECT_DIR$/View/target/View-1.0-SNAPSHOT</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="View/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="View" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: javax.faces:jsf-api:2.0" />
+          <element id="library" level="project" name="Maven: javax:javaee-api:6.0" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
